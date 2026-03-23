@@ -306,14 +306,14 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
                   />
                 </td>
                 <td className="px-4 sm:px-6 py-4 sm:py-5 text-sm text-gray-600 font-medium">
-                  <div className="flex flex-col max-w-[150px] sm:max-w-none">
-                    <span className="truncate">{provider.email}</span>
+                  <div className="flex flex-col">
+                    <span>{provider.email}</span>
                     <span className="text-xs text-gray-400 xl:hidden">
                       {provider.phoneNumber}
                     </span>
                   </div>
                 </td>
-                <td className="px-6 py-5 text-sm text-gray-500 hidden xl:table-cell whitespace-nowrap">
+                <td className="px-6 py-5 text-sm text-gray-500 hidden xl:table-cell">
                   {provider.phoneNumber}
                 </td>
                 <td className="px-6 py-5 text-sm text-gray-500 hidden xl:table-cell">
@@ -325,13 +325,13 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
                 <td className="px-6 py-5 text-sm text-gray-500 hidden xl:table-cell">
                   {provider.serviceOffering}
                 </td>
-                <td className="px-6 py-5 text-sm text-gray-500 hidden lg:table-cell whitespace-nowrap">
+                <td className="px-6 py-5 text-sm text-gray-500 hidden lg:table-cell">
                   {new Date(provider.signupDate).toLocaleDateString()}
                 </td>
                 <td className="px-4 sm:px-6 py-4 sm:py-5 text-sm hidden md:table-cell">
                   <span
                     className={cn(
-                      "px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap",
+                      "px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap",
                       {
                         "bg-green-100 text-green-700":
                           provider.status === "Onboarded",
@@ -361,18 +361,18 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
       </div>
 
       {/* Pagination */}
-      <div className="px-4 sm:px-8 py-4 sm:py-5 bg-white border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-xs sm:text-sm text-gray-500 font-medium order-2 sm:order-1">
+      <div className="px-8 py-5 bg-white border-t border-gray-100 flex items-center justify-between">
+        <div className="text-sm text-gray-500 font-medium hidden sm:block">
           Showing <span className="text-gray-900">{(currentPage - 1) * rowsPerPage + 1}</span> to <span className="text-gray-900">{Math.min(currentPage * rowsPerPage, filteredData.length)}</span> of <span className="text-gray-900">{filteredData.length}</span> results
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 order-1 sm:order-2">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="p-1.5 sm:p-2 text-gray-400 disabled:opacity-30 hover:bg-gray-50 rounded-lg transition-all border border-gray-100 sm:border-transparent"
+            className="p-2 text-gray-400 disabled:opacity-30 hover:bg-gray-50 rounded-md transition-all"
           >
-            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+            <ChevronLeft className="h-5 w-5" />
           </button>
 
           <div className="flex gap-1">
@@ -384,7 +384,7 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
 
               if (pageNum !== 1 && pageNum !== totalPages && !isNear) {
                 if (pageNum === 2 || pageNum === totalPages - 1) {
-                  return <span key={pageNum} className="w-8 sm:w-10 flex items-center justify-center text-gray-400">...</span>;
+                  return <span key={pageNum} className="w-8 flex items-center justify-center text-gray-400">...</span>;
                 }
                 return null;
               }
@@ -393,9 +393,9 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
                 <button
                   key={pageNum}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-sm font-bold rounded-lg transition-all ${
+                  className={`w-10 h-10 text-sm font-bold rounded-lg transition-all ${
                     isCurrent
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                      ? "bg-white text-blue-600 border-2 border-blue-500 shadow-sm"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -410,9 +410,9 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="p-1.5 sm:p-2 text-gray-400 disabled:opacity-30 hover:bg-gray-50 rounded-lg transition-all border border-gray-100 sm:border-transparent"
+            className="p-2 text-gray-400 disabled:opacity-30 hover:bg-gray-50 rounded-md transition-all"
           >
-            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+            <ChevronRight className="h-5 w-5" />
           </button>
         </div>
       </div>
