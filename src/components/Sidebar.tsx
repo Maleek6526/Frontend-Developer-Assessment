@@ -6,7 +6,7 @@ import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "../lib/utils";
 import { format } from "date-fns";
-import { serviceProviders, type ServiceProvider } from "../lib/mock-data";
+import { type ServiceProvider } from "../lib/mock-data";
 import * as React from "react";
 import Swal from "sweetalert2";
 

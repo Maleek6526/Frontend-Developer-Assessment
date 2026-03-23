@@ -33,6 +33,12 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
       sortableData.sort((a, b) => {
         const aValue = a[sortConfig.key];
         const bValue = b[sortConfig.key];
+
+        if (aValue === undefined || bValue === undefined) {
+          if (aValue === undefined && bValue === undefined) return 0;
+          return aValue === undefined ? 1 : -1;
+        }
+
         if (aValue < bValue) {
           return sortConfig.direction === "ascending" ? -1 : 1;
         }
@@ -373,8 +379,6 @@ const Table: React.FC<TableProps> = ({ data, searchTerm, onUpdateProvider }) => 
             {/* Show only relevant pages on mobile */}
             {[...Array(totalPages)].map((_, i) => {
               const pageNum = i + 1;
-              const isFirst = pageNum === 1;
-              const isLast = pageNum === totalPages;
               const isCurrent = currentPage === pageNum;
               const isNear = Math.abs(currentPage - pageNum) <= 1;
 
